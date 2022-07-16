@@ -1,5 +1,5 @@
 # build-rs-example
-An example project using build.rs to setup build time configuration (env vars) for no_std or ICP like systems that don't have file system access.
+An example project using [build.rs](https://doc.rust-lang.org/cargo/reference/build-script-examples.html) to setup build time configuration (env vars) for no_std or ICP like systems that don't have file system access.
 
 ## Setup
 This project reads a `.env` file to determine the `ENV` to build to.  It matches the value of `ENV` to one of the `enum Profile` variants.
