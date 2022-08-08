@@ -64,7 +64,8 @@ fn main() {
 
     let mut file_str: String = String::new();
     file_str.push_str(PRELUDE);
-    file_str.push_str(&format!("const CONFIG: Config = {:?};", config));
+
+    file_str.push_str(&format!("\nconst CONFIG: Config = {:?};", config));
     std::println!("file_str: {:?}", file_str);
     fs::write(
         &dest_path,
@@ -83,9 +84,19 @@ fn main() {
 const PRELUDE: &str = r#"
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug,)]
 pub struct Config<'a> {
     service: &'a str,
     logger: &'a str,
+}
+
+impl<'a> ConfigHelper for Config<'a> {
+    fn get_service(&self) -> &'a str {
+        &self.service
+    }
+
+    fn get_logger(&self) -> &'a str {
+        &self.logger
+    }
 }
 "#;
